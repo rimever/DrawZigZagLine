@@ -1,17 +1,12 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
+
+#endregion
 
 namespace DrawZigZagLine
 {
@@ -25,7 +20,7 @@ namespace DrawZigZagLine
             InitializeComponent();
             {
                 var polyLine = new Polyline();
-                var points = new PointCollection()
+                var points = new PointCollection
                 {
                     new Point(100, 100),
                     new Point(700, 500)
@@ -41,6 +36,7 @@ namespace DrawZigZagLine
                 {
                     points.Add(point);
                 }
+
                 polyLine.Points = points;
                 polyLine.Stroke = Brushes.Blue;
                 Canvas.Children.Add(polyLine);
@@ -72,11 +68,12 @@ namespace DrawZigZagLine
                 var cx = nextPoint.X - previousPoint.X;
                 var cy = nextPoint.Y - previousPoint.Y;
                 var angle = 60 * Math.PI / 180;
-                var x = cx * (float)Math.Cos(angle) - cy * (float)Math.Sin(angle) + previousPoint.X;
-                var y = cx * (float)Math.Sin(angle) + cy * (float)Math.Cos(angle) + previousPoint.Y;
+                var x = cx * (float) Math.Cos(angle) - cy * (float) Math.Sin(angle) + previousPoint.X;
+                var y = cx * (float) Math.Sin(angle) + cy * (float) Math.Cos(angle) + previousPoint.Y;
                 yield return new Point(x, y);
                 yield return nextPoint;
             }
+
             yield return endPoint;
         }
     }
